@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Header, Divider } from 'react-native-elements';
 import Temperature from './components/temperature/Temperature';
+import AppInfo from './components/appinfo/AppInfo';
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
       <Divider style={styles.divider} />
       <Temperature></Temperature>
       <Divider style={styles.divider} />
+      <AppInfo></AppInfo>
     </View>
   );
 }
