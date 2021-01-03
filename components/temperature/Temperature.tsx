@@ -1,7 +1,6 @@
 import React from 'react';
-import { Text, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
 import { ListItem } from 'react-native-elements';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'; 
 import { AIO_KEY, USERNAME } from 'react-native-dotenv'
 
@@ -103,14 +102,14 @@ export default class Temperature extends React.Component<{}, State> {
   render() {
     if(this.state.isLoading){
       return(
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
           <ActivityIndicator/>
-        </SafeAreaView>
+        </View>
       )
     }
 
     return (
-      <SafeAreaView>      
+      <View>      
         <ListItem key={1} bottomDivider>
           <Icon style={styles.icon} name={this.state.temperature.icon} />
           <ListItem.Content>
@@ -128,7 +127,7 @@ export default class Temperature extends React.Component<{}, State> {
           </ListItem.Content>
           <Text style={styles.icon}>{this.state.humidity.value}</Text>
         </ListItem>
-      </SafeAreaView>
+      </View>
 
     );
   }
