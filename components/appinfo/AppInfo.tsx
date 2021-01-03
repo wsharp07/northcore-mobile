@@ -1,8 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import Constants from 'expo-constants';
-
-
 
 export default class Temperature extends React.Component<{}, {}> {
     constructor(props) {
@@ -13,9 +12,9 @@ export default class Temperature extends React.Component<{}, {}> {
 
     render() {
         return (
-            <View>
+            <SafeAreaView>
                 <Text style={styles.version}>Version: {Constants.manifest.version}</Text>
-            </View>
+            </SafeAreaView>
         )
     }
 }

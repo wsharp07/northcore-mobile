@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
+import { Text, ActivityIndicator, StyleSheet } from 'react-native';
 import { ListItem } from 'react-native-elements';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'; 
 import { AIO_KEY, USERNAME } from 'react-native-dotenv'
 
@@ -80,7 +81,7 @@ export default class Temperature extends React.Component<{}, State> {
     })
 
     return Promise.all([temp, humidity])
-      .then((res) => {
+      .then(() => {
         this.setState({
           isLoading: false,
         }, function(){
@@ -102,33 +103,32 @@ export default class Temperature extends React.Component<{}, State> {
   render() {
     if(this.state.isLoading){
       return(
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
           <ActivityIndicator/>
-        </View>
+        </SafeAreaView>
       )
     }
 
     return (
-      <View>      
-        <ListItem
-              key={1}
-              title={this.state.temperature.title}
-              subtitle={<Text style={styles.subtitle}>{this.state.temperature.updatedAt}</Text>}
-              leftIcon={<Icon style={styles.icon} name={this.state.temperature.icon} />}
-              bottomDivider
-              rightIcon={<Text style={styles.icon}>{this.state.temperature.value}</Text>}
-              
-            />
-        <ListItem
-              key={2}
-              title={this.state.humidity.title}
-              subtitle={<Text style={styles.subtitle}>{this.state.humidity.updatedAt}</Text>}
-              leftIcon={<Icon style={styles.icon} name={this.state.humidity.icon} />}
-              bottomDivider
-              rightIcon={<Text style={styles.icon}>{this.state.humidity.value}</Text>}
-              
-            />
-      </View>
+      <SafeAreaView>      
+        <ListItem key={1} bottomDivider>
+          <Icon style={styles.icon} name={this.state.temperature.icon} />
+          <ListItem.Content>
+            <ListItem.Title>{this.state.temperature.title}</ListItem.Title>
+            <ListItem.Subtitle>{<Text style={styles.subtitle}>{this.state.temperature.updatedAt}</Text>}</ListItem.Subtitle>
+          </ListItem.Content>
+          <Text style={styles.icon}>{this.state.temperature.value}</Text>
+        </ListItem>
+
+        <ListItem key={2} bottomDivider>
+          <Icon style={styles.icon} name={this.state.humidity.icon} />
+          <ListItem.Content>
+            <ListItem.Title>{this.state.humidity.title}</ListItem.Title>
+            <ListItem.Subtitle>{<Text style={styles.subtitle}>{this.state.humidity.updatedAt}</Text>}</ListItem.Subtitle>
+          </ListItem.Content>
+          <Text style={styles.icon}>{this.state.humidity.value}</Text>
+        </ListItem>
+      </SafeAreaView>
 
     );
   }
